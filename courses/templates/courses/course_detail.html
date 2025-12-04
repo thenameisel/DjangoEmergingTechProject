@@ -1,0 +1,29 @@
+{% extends 'courses/base.html' %}
+
+{% block title %}{{ course.title }}{% endblock %}
+
+{% block content %}
+<div class="course-header">
+    <h1>{{ course.title }}</h1>
+    <p class="instructor">Instructor: {{ course.instructor.username }}</p>
+    <p class="description">{{ course.description }}</p>
+</div>
+
+<h2>Lessons</h2>
+{% if lessons %}
+    <div class="lesson-list">
+        {% for lesson in lessons %}
+        <div class="lesson-item">
+            <span class="lesson-number">{{ forloop.counter }}</span>
+            <div class="lesson-info">
+                <h3>{{ lesson.title }}</h3>
+                <p class="lesson-date">{{ lesson.published_date|date:"M d, Y" }}</p>
+            </div>
+            <a href="{% url 'courses:lesson_detail' course.slug lesson.slug %}" class="btn-small">Start Lesson</a>
+        </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No lessons available yet.</p>
+{% endif %}
+{% endblock %}
