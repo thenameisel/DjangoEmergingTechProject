@@ -58,7 +58,3 @@ If you want, I can also add a `Makefile`/PowerShell script or a `dev` task to si
 ## Notes
 
 Admin panel is found at http://127.0.0.1:8000/admin/
-
-Logout is broken
-
-Needs logo put in place
