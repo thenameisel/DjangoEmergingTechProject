@@ -47,6 +47,9 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    # Enforce login for all views by default; the middleware checks
+    # `LOGIN_EXEMPT_URLS` (regexes) to allow public pages like the login view.
+    'core.middleware.LoginRequiredMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -62,6 +65,7 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
+                'django.template.context_processors.media',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
@@ -128,5 +132,15 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 # Authentication
 LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+# After logout, redirect users to the login page so they can log back in or sign up
+LOGOUT_REDIRECT_URL = '/accounts/login/'
 LOGIN_URL = '/accounts/login/'
+# Regex list of paths that don't require authentication (checked against
+# request.path_info.lstrip('/')). Keep this minimal: account auth URLs,
+# admin, and static/media during development.
+LOGIN_EXEMPT_URLS = [
+    r'^accounts/',
+    r'^admin/',
+    r'^static/',
+    r'^media/',
+]
