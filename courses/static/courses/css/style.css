@@ -97,7 +97,7 @@ body {
 .btn {
     display: inline-block;
     padding: 0.5rem 1rem;
-    background: #3498db;
+    background: #007D81;
     color: white;
     text-decoration: none;
     border-radius: 4px;
@@ -105,15 +105,15 @@ body {
 }
 
 .btn:hover {
-    background: #2980b9;
+    background: #00BEB8;
 }
 
 .btn-primary {
-    background: #2ecc71;
+    background: #5DC594;
 }
 
 .btn-primary:hover {
-    background: #27ae60;
+    background: #00DCA9;
 }
 
 .btn-small {
@@ -155,7 +155,7 @@ body {
 }
 
 .lesson-number {
-    background: #3498db;
+    background: #007D81;
     color: white;
     width: 30px;
     height: 30px;
@@ -186,7 +186,7 @@ body {
 }
 
 .breadcrumb a {
-    color: #3498db;
+    color: #007D81;
     text-decoration: none;
 }
 
@@ -221,7 +221,7 @@ body {
 .back-link {
     display: inline-block;
     margin-top: 1rem;
-    color: #3498db;
+    color: #007D81;
     text-decoration: none;
 }
 
