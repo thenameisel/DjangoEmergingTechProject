@@ -140,6 +140,7 @@ LOGIN_URL = '/accounts/login/'
 # admin, and static/media during development.
 LOGIN_EXEMPT_URLS = [
     r'^accounts/',
+    r'^register/',
     r'^admin/',
     r'^static/',
     r'^media/',
