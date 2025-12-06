@@ -7,6 +7,22 @@
     <h1>{{ course.title }}</h1>
     <p class="instructor">Instructor: {{ course.instructor.username }}</p>
     <p class="description">{{ course.description }}</p>
+    {% if user.is_authenticated %}
+    <form action="{% url 'courses:toggle_subscription' course.slug%}" method="POST">
+        {% csrf_token %}
+        {% if is_subscribed %}
+        <button type="submit" class="btn btn-danger">
+            Unsubscribe
+        </button>
+        {% else %}
+        <button type="submit" class="btn btn-success">
+            Subscribe
+        </button>        
+        {% endif %}
+    </form>
+    {% else %}
+    <a href="{% url 'login' %}">Login to Subscribe</a>
+    {% endif %}
 </div>
 
 <h2>Lessons</h2>
@@ -18,6 +34,11 @@
             <div class="lesson-info">
                 <h3>{{ lesson.title }}</h3>
                 <p class="lesson-date">{{ lesson.published_date|date:"M d, Y" }}</p>
+                {% if lesson.is_complete %}
+                <span style="color: green;">
+                    &#10004; Completed
+                </span>
+                {% endif %}
             </div>
             <a href="{% url 'courses:lesson_detail' course.slug lesson.slug %}" class="btn-small">Start Lesson</a>
         </div>

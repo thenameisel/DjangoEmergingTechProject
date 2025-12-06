@@ -27,6 +27,7 @@ class Lesson(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='lessons')
     title = models.CharField(max_length=200)
     slug = models.SlugField(blank=True)
+    youtube_id = models.CharField(max_length=50, blank=True, null=True)
     content = models.TextField()
     order = models.IntegerField(default=0)
     published_date = models.DateTimeField(auto_now_add=True)
@@ -57,3 +58,19 @@ class Lesson(models.Model):
             course=self.course,
             order__lt=self.order
         ).last()
+
+class Subscription(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="subscriptions")
+    course  = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="subscribers")
+    subcsribed_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        unique_together = ('user', 'course')
+
+class LessonCompletion(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
+    read_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'lesson')

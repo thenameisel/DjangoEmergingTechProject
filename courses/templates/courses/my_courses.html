@@ -12,11 +12,11 @@
             <h2>{{ course.title }}</h2>
             <p class="description">{{ course.description|truncatewords:30 }}</p>
             <p class="meta">{{ course.lessons.count }} lesson{{ course.lessons.count|pluralize }}</p>
-            <a href="{% url 'courses:course_detail' course.slug %}" class="btn">Manage Course</a>
+            <a href="{% url 'courses:course_detail' slug=course.slug %}" class="btn">View Course</a>
         </div>
         {% endfor %}
     </div>
 {% else %}
-    <p>You haven't created any courses yet.</p>
+    <p>You haven't subscribed to any courses yet.</p>
 {% endif %}
 {% endblock %}

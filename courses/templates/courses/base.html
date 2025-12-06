@@ -18,6 +18,9 @@
                 <li><a href="{% url 'courses:home' %}">Courses</a></li>
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'courses:my_courses' %}">My Courses</a></li>
+                    {% if user.is_staff %}
+                    <li><a href="{% url 'admin:index' %}">Course Admin</a></li>
+                    {% endif %}
                     <li><span>Welcome, {{ user.username }}</span></li>
                     <li>
                         <form method="post" action="{% url 'logout' %}" style="display:inline; margin:0; padding:0;">
